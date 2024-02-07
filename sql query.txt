@@ -1,0 +1,46 @@
+======================
+ UPDATE INSERT DELETE
+======================
+ 
+statementStr = String.format("DELETE FROM Users WHERE UserID = %d",currentUser.UserID);
+statementStr = String.format("UPDATE Users SET Password = '%s' WHERE UserID = %d",newPassword,currentUser.UserID);
+statementStr = String.format("UPDATE Users SET Mail = '%s' WHERE UserID = %d",user_email.getText(),currentUser.UserID);
+statementStr = String.format("UPDATE Users SET Username = '%s' WHERE UserID = %d",user_username.getText(),currentUser.UserID);
+
+
+
+
+=======================
+	SELECT
+=======================
+String statementStr = "select * from Actors";
+String statementStr = "select * from Characters";
+String statementStr = "select * from Genres";
+String statementStr = "Select * from Users";
+
+
+String statementStr = "select * from Directors";
+
+String statementStr = "select * from Films order by FilmName";
+
+String statementStr = "Select * from Films where FilmName like '" + text + "%'";
+
+String statementStr = String.format("Select * from Users where UserID = %d",LoginController.ID);
+
+String statementStr = String.format("SELECT UserID, Mail, Password, Username FROM Users WHERE UserID = %d",ID);
+
+String statementStr = "SELECT AwardName FROM AwardedFilms INNER JOIN Awards ON Awards.AwardID = AwardedFilms.AwardID INNER JOIN Films ON Films.FilmID = AwardedFilms.FilmID WHERE Films.FilmID = " + MovieID;
+
+String statementStr = "SELECT GenreName, COUNT(FilmID) as Numbers FROM Films RIGHT JOIN Genres on Films.GenreID = Genres.GenreID  GROUP BY GenreName HAVING COUNT(FilmID) > 0";
+String statementStr = String.format("SELECT UserID, Mail, Password, Username FROM Users WHERE UserID = %d",ID);
+
+String statementStr = "SELECT Actors.ActorName + ' ' + Actors.ActorSurname AS Actor FROM Actors_Films INNER JOIN Actors ON Actors.ActorID = Actors_Films.ActorID INNER JOIN Films ON Films.FilmID = Actors_Films.FilmID  WHERE Films.FilmID = " + MovieID;
+
+String statementStr = "SELECT FilmName, Summary, PrimaryCountry, Year, RunTimeMin, DirectorName + ' ' + DirectorSurname as Director, ScenaristName + ' ' + ScenaristSurname AS Scenarist, GenreName AS Genre FROM Films LEFT JOIN Directors on Films.DirectorID = Directors.DirectorID LEFT JOIN Scenarists ON Films.ScenaristID = Scenarists.ScenaristID LEFT JOIN Genres ON Films.GenreID = Genres.GenreID WHERE FilmID = " + MovieID;
+
+SELECT FilmID, FilmName FROM Films WHERE FilmID in 
+(SELECT Films.FilmID FROM LikedFilms
+INNER JOIN Films ON Films.FilmID = LikedFilms.FilmID
+INNER JOIN Users ON Users.UserID = LikedFilms.UserID
+WHERE Users.UserID = %d)
+ORDER BY FilmName
